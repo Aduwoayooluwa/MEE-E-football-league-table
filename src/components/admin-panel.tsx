@@ -15,6 +15,8 @@ interface MatchResultFormValues {
 
 export default function AdminPanel() {
   const [teams, setTeams] = useState<{ id: string; name: string }[]>([]);
+  const [selectedTeam1, setSelectedTeam1] = useState<string | null>(null);
+  const [selectedTeam2, setSelectedTeam2] = useState<string | null>(null);
 
   // Fetch teams (players) from Appwrite
   useEffect(() => {
@@ -62,17 +64,31 @@ export default function AdminPanel() {
     }
   };
 
+  // Filtered team lists based on the selection
+  const team1Options = teams.filter((team) => team.id !== selectedTeam2);
+  const team2Options = teams.filter((team) => team.id !== selectedTeam1);
+
   return (
     <div>
       <h2>Record Match Results</h2>
-      <Form onFinish={handleSubmit} layout="vertical">
+      <Form
+        onFinish={handleSubmit}
+        layout="vertical"
+        onValuesChange={(changedValues) => {
+          if (changedValues.team1) setSelectedTeam1(changedValues.team1);
+          if (changedValues.team2) setSelectedTeam2(changedValues.team2);
+        }}
+      >
         <Form.Item
           label="Team 1"
           name="team1"
           rules={[{ required: true, message: 'Please select Team 1!' }]}
         >
-          <Select placeholder="Select Team 1">
-            {teams.map((team) => (
+          <Select
+            placeholder="Select Team 1"
+            onChange={(value) => setSelectedTeam1(value)}
+          >
+            {team1Options.map((team) => (
               <Select.Option key={team.id} value={team.id}>
                 {team.name}
               </Select.Option>
@@ -84,8 +100,11 @@ export default function AdminPanel() {
           name="team2"
           rules={[{ required: true, message: 'Please select Team 2!' }]}
         >
-          <Select placeholder="Select Team 2">
-            {teams.map((team) => (
+          <Select
+            placeholder="Select Team 2"
+            onChange={(value) => setSelectedTeam2(value)}
+          >
+            {team2Options.map((team) => (
               <Select.Option key={team.id} value={team.id}>
                 {team.name}
               </Select.Option>
@@ -110,7 +129,7 @@ export default function AdminPanel() {
           label="Season"
           name="season"
           initialValue={'1st season'}
-          rules={[{ required: true}]}
+          rules={[{ required: true }]}
         >
           <Input disabled />
         </Form.Item>

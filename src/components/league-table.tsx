@@ -9,7 +9,7 @@ const PLAYERS_COLLECTION_ID = import.meta.env.VITE_PLAYERS_COLLECTION_ID;
 const MATCH_RESULTS_COLLECTION_ID = import.meta.env.VITE_MATCH_RESULTS_COLLECTION_ID;
 
 export default function LeagueTable() {
-  const [teams, setTeams] = useState<Player[]>([]); // Explicit type here
+  const [teams, setTeams] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchLeagueData = async () => {
@@ -97,13 +97,14 @@ export default function LeagueTable() {
   const columns = [
     { title: 'Team', dataIndex: 'name', key: 'name' },
     { title: 'Points', dataIndex: 'points', key: 'points' },
-    { title: 'Goal Difference', dataIndex: 'goalDifference', key: 'goalDifference' },
-    { title: 'Goals Scored', dataIndex: 'goalsFor', key: 'goalsFor' },
-    { title: 'Goals Against', dataIndex: 'goalsAgainst', key: 'goalsAgainst' },
-    { title: 'Played', dataIndex: 'matches_played', key: 'matches_played' },
+    { title: 'GD', dataIndex: 'goalDifference', key: 'goalDifference' },
+    { title: 'GF', dataIndex: 'goalsFor', key: 'goalsFor' },
+    { title: 'GA', dataIndex: 'goalsAgainst', key: 'goalsAgainst' },
+    { title: 'PL', dataIndex: 'matches_played', key: 'matches_played' },
     { title: 'Won', dataIndex: 'won', key: 'won' },
     { title: 'Drawn', dataIndex: 'drawn', key: 'drawn' },
     { title: 'Lost', dataIndex: 'lost', key: 'lost' },
+    
   ];
 
   return (
