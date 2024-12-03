@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, message } from 'antd';
 import Cookies from 'js-cookie';
 import { account } from '../services/appwrite';
@@ -65,6 +65,8 @@ export default function LoginPage() {
             Login
           </Button>
         </Form>
+
+        <p className='mt-4 text-sm  text-center'>Click <Link className='text-blue-500 hover:underline transition-all ease-linear duration-300 text-center ' to='/'>here</Link> to go back <Link to="/" className=''>home</Link></p>
 
       </div>
     </div>
