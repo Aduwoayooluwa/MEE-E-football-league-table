@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import { databases } from '../services/appwrite';
 import { calculateGoalDifference, sortTeams } from '../utils/calculations';
 import { Player, MatchResult } from '../types';
+import { Query } from 'appwrite';
 
 const DATABASE_ID = import.meta.env.VITE_DATABASE_ID;
 const PLAYERS_COLLECTION_ID = import.meta.env.VITE_PLAYERS_COLLECTION_ID;
@@ -16,12 +17,20 @@ export default function LeagueTable() {
     try {
       const playersResponse = await databases.listDocuments<Player>(
         DATABASE_ID,
-        PLAYERS_COLLECTION_ID
+        PLAYERS_COLLECTION_ID,
+        
       );
       const matchResultsResponse = await databases.listDocuments<MatchResult>(
         DATABASE_ID,
-        MATCH_RESULTS_COLLECTION_ID
+        MATCH_RESULTS_COLLECTION_ID,
+        [
+          Query.limit(100),
+          Query.offset(0),
+        ]
+       
       );
+
+      console.log(matchResultsResponse, 'matchResponse')
 
       const playerStats: Record<string, Player> = playersResponse.documents.reduce((acc, player) => {
         acc[player.$id] = {
