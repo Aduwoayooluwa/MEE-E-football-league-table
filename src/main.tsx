@@ -8,7 +8,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
    <ConfigProvider theme={{
     token: {
-      fontFamily: 'DM Sans'
+      fontFamily: 'Outfit '
     }
    }}>
      <AppRouter />

@@ -2,8 +2,8 @@ interface TeamStats {
     won: number;
     drawn: number;
     lost: number;
-    goalsFor: number;
-    goalsAgainst: number;
+    goals_for: number; // Changed from goalsFor to match Appwrite schema
+    goals_against: number; // Changed from goalsAgainst to match Appwrite schema
   }
   
   export function calculatePoints(stats: TeamStats) {
@@ -11,13 +11,13 @@ interface TeamStats {
   }
   
   export function calculateGoalDifference(stats: TeamStats) {
-    return stats.goalsFor - stats.goalsAgainst;
+    return stats.goals_for - stats.goals_against;
   }
   
 interface Team {
     points: number;
     goalDifference: number;
-    goalsFor: number;
+    goals_for: number; // Changed from goalsFor to match Appwrite schema
 }
 
 export function sortTeams(teams: Team[]): Team[] {
@@ -25,7 +25,7 @@ export function sortTeams(teams: Team[]): Team[] {
         if (b.points !== a.points) return b.points - a.points; 
         if (b.goalDifference !== a.goalDifference)
             return b.goalDifference - a.goalDifference; 
-        return b.goalsFor - a.goalsFor; 
+        return b.goals_for - a.goals_for; 
     });
 }
   
