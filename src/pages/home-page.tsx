@@ -1,6 +1,6 @@
 import LeagueTable from "../components/league-table";
 import SeasonRegistration from "../components/season-registration";
-import DebugPanel from "../components/debug-panel";
+// import DebugPanel from "../components/debug-panel";
 import { Tabs, Card } from 'antd';
 
 export default function HomePage() {
@@ -15,11 +15,11 @@ export default function HomePage() {
             label: 'Register for Season',
             children: <SeasonRegistration />,
         },
-        {
-            key: 'debug',
-            label: 'Debug Panel',
-            children: <DebugPanel />,
-        },
+        // {
+        //     key: 'debug',
+        //     label: 'Debug Panel',
+        //     children: <DebugPanel />,
+        // },
     ];
 
     return (
